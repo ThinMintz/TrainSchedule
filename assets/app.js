@@ -102,6 +102,6 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
 
 // Add each train's data into the table
-  $("#train-table > tbody").append("<tr><td>" + trainName + "</tr><td>" + destinationName + "</tr><td>" + frequency + "</tr><td>" + trainMinsAway2 + "</tr><td>" + minutes + "</tr></td>");
+  $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + destinationName + "</td><td>" + frequency + "</td><td>" + trainMinsAway2 + "</td><td>" + minutes + "</td></td>");
 
 });
