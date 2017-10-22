@@ -18,8 +18,9 @@
 
     var trainName = $("#train-name").val().trim();
     var destinationName = $("#destination-name").val().trim();
-    var firstTrain = moment($("#first-train").val().trim(), "MM:mm").format("X");
+    var firstTrain = moment($("#first-train").val().trim(), "HH:mm").format("X");
     var frequency = $("#frequency-name").val().trim();
+
 
 //creates local "temporary" object for holding employee data
     var newTrain = {
@@ -61,14 +62,46 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
   console.log(frequency);
 
   // Prettify the train mins away
-  var trainMinsAway = moment.unix(firstTrain).format("MM:mm");
+  var trainMinsAway = moment.unix(firstTrain).format("HH:mm");
 
   // Calculate the months worked using hardcore math
   // To calculate the months worked
   var trainTime = moment().diff(moment.unix(firstTrain, "X"), "minutes");
   console.log(trainTime);
 
+
+
+
+  //math to determine arrival time and minutes that the train will arrive
+    // present
+    var current = moment();
+    
+    // read that you need to subtract 1 year to make sure it comes before current time
+    var trainTime = moment(firstTrain,"HH:mm").subtract(1, "years");
+
+    // time difference between present and train time in minutes
+    var difference = moment().diff(moment(trainTime), "minutes");
+
+    // divide the time difference by the frequency, this number is important in determining when the next train is coming
+    var difference2 = difference % frequency;
+
+    // minutes for the train to arrive
+    var minutes = frequency - difference2;
+
+    // time the train arrives
+    var arrival = moment().add(minutes, "minutes")
+    
+    var trainMinsAway2 = moment.unix(arrival).format("HH:mm");
+    console.log(trainMinsAway2);
+    console.log(current);
+    console.log(trainTime);
+    console.log(difference);
+    console.log(difference2);
+    console.log(minutes);
+    console.log(arrival);
+
+
 // Add each train's data into the table
-  $("#train-table > tbody").append("<tr><td>" + trainName + "</tr></td>" + destinationName + "</tr><td>" + trainMinsAway + "</tr><td>" + frequency + "</tr></td>");
+  $("#train-table > tbody").append("<tr><td>" + trainName + "</tr><td>" + destinationName + "</tr><td>" + frequency + "</tr><td>" + trainMinsAway2 + "</tr><td>" + minutes + "</tr></td>");
 
 });
