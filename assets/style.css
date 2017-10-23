@@ -44,12 +44,15 @@
 /* Caption text */
 .text {
   color: #f2f2f2;
-  font-size: 40px;
+  font-size: 80px;
   padding: 8px 12px;
   position: absolute;
   bottom: 8px;
   width: 100%;
   text-align: center;
+  font-family: 'Tenor Sans', sans-serif;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 }
 
 /* Number text (1/3 etc) */
@@ -93,4 +96,9 @@
 @keyframes fade {
   from {opacity: .4} 
   to {opacity: 1}
+}
+
+h3, .panel-title, th, .form-group label {
+	font-family: 'Ubuntu', sans-serif;
+	font-style: bold;
 }
