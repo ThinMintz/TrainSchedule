@@ -77,36 +77,35 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
   console.log(firstTrain);
   console.log(frequency);
 
-  // Prettify the train mins away
-  var trainMinsAway = moment.unix(firstTrain).format("HH:mm");
-
-  // Calculate the months worked using hardcore math
+ /* // Calculate the months worked using hardcore math
   // To calculate the months worked
   var trainTime = moment().diff(moment.unix(firstTrain, "X"), "minutes");
-  console.log(trainTime);
+  console.log(trainTime);*/
 
 
 
 
   //math to determine arrival time and minutes that the train will arrive
-    // present
+  //i had help with this and don't quite understand this
+    // the current time
     var current = moment();
     
-    // read that you need to subtract 1 year to make sure it comes before current time
+    // subtract one year to make sure it comes before current time (don't quite understand this!)
     var trainTime = moment(firstTrain,"HH:mm").subtract(1, "years");
 
-    // time difference between present and train time in minutes
+    // difference between current time and trainTime (minutes)
     var difference = moment().diff(moment(trainTime), "minutes");
 
-    // divide the time difference by the frequency, this number is important in determining when the next train is coming
+    // divide the time difference by the frequency, to find out when the next train is coming
     var difference2 = difference % frequency;
 
     // minutes for the train to arrive
     var minutes = frequency - difference2;
 
-    // time the train arrives
+    // arrival shows the time the train arrives (minutes)
     var arrival = moment().add(minutes, "minutes")
     
+    // trainMinAway2 shows the time train arrival time in the correct format
     var trainMinsAway2 = moment.unix(arrival).format("HH:mm");
     console.log(trainMinsAway2);
     console.log(current);
